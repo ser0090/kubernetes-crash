@@ -16,7 +16,7 @@ public class Todo {
 	private int id;
     
 	private String user;
-    
+    // la identidad es es mapeada a la variable desc
     @Size(min=10, message="Enter at least 10 Characters...")
     @Column(name="description")
     private String desc;
