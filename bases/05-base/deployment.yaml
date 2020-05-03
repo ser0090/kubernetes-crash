@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: currency-conversion
+  name: currency-conversion
+  namespace: default
+spec:
+  replicas: 2 #CHANGE
+  minReadySeconds: 45
+  selector:
+    matchLabels:
+      app: currency-conversion
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: currency-conversion
+    spec:
+      containers:
+      - image: in28min/currency-conversion:0.0.2-RELEASE #CHANGE
+        imagePullPolicy: IfNotPresent
+        name: currency-conversion
+        env:
+          - name: CURRENCY_EXCHANGE_URI
+            value: http://currency-exchange
+          # - name: SPRING_PROFILES_ACTIVE
+            # value: kubernetes
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
