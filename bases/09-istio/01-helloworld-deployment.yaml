@@ -6,10 +6,16 @@ metadata:
   name: hello-world-rest-api
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: hello-world-rest-api
+  strategy:
+    # rollingUpdate:
+    #  maxSurge: 25%
+    #  maxUnavailable: 25%
+    type: Recreate
+    # type: RollingUpdate
   template:
     metadata:
       labels:
