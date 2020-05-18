@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-05-18T01:39:49Z"
+  labels:
+    app: strapi
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          .: {}
+          f:app: {}
+      f:spec:
+        f:ports:
+          .: {}
+          k:{"port":1337,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: Go-http-client
+    operation: Update
+    time: "2020-05-18T01:39:49Z"
+  name: strapi-svc
+  namespace: default
+  resourceVersion: "5447"
+  selfLink: /api/v1/namespaces/default/services/strapi-svc
+  uid: 8c6a367b-ca64-436c-9878-ac88298124a7
+spec:
+  clusterIP: 10.152.183.13
+  ports:
+  - name: strapi
+    port: 1337
+    protocol: TCP
+    targetPort: 1337
+  selector:
+    app: strapi
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
