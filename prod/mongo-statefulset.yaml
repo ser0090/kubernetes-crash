@@ -15,7 +15,12 @@ spec:
         app: mongo
     spec:
       containers:
-      - image: mongo
+      - env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: strapi
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: strapi
+        image: mongo
         imagePullPolicy: IfNotPresent
         name: mongo
         ports:

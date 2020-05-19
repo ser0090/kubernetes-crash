@@ -24,7 +24,12 @@ spec:
           value: "27017"
         - name: DATABASE_NAME
           value: strapi
-        image: martintarres/strapi-app:latest
+        - name : DATABASE_USERNAME
+          value: strapi
+        - name: DATABASE_PASSWORD
+          value: strapi
+        # image: martintarres/strapi-app:latest
+        image: strapi/strapi
         imagePullPolicy: IfNotPresent
         name: strapi
         ports:
