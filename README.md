@@ -4,6 +4,7 @@ Kubernetes and Docker with Google Kubernetes Engine deploying Spring Boot Micros
 ## Strapi Project
 ### Microk8s in Ubuntu
 1 - install [microk8s](https://microk8s.io/docs/)
+
 2 - config helm
 ```
 microk8s.enable helm
@@ -22,4 +23,9 @@ microk8s.helm init
 ```
 kubectl get pods --namespace kube-system
 microk8s.helm install ./strapi/
+```
+
+4 - enable ingress
+```
+microk8s.enable ingress
 ```
