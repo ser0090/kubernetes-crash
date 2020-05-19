@@ -10,7 +10,8 @@ spec:
   - host: # strapi.f.efn.unc.edu.ar
     http:
       paths:
-      - path: /strapi/*
+      - path: /
+        pathType: Prefix
         backend:
           serviceName: strapi-svc
           servicePort: 1337    
