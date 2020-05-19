@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: strapi.f.efn.unc.edu.ar
+  - host: # strapi.f.efn.unc.edu.ar
     http:
       paths:
       - path: /strapi/*
