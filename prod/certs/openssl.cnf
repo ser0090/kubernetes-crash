@@ -1,0 +1,92 @@
+# *************************************************************************************
+# www.linuxtotal.com.mx
+# sergio.gonzalez.duran@gmail.com
+# 
+# Archivo de configuracion para openssl
+#
+# ***** openssl.cnf ******
+
+dir           = .    # variable que establece el directorio de trabajo
+  
+# seccion que permite convertirnos en una CA
+# solo se hace referncia a otra sección CA_default
+[ ca ]
+default_ca    = CA_default
+
+[ CA_default ]
+serial        = $dir/serial          # archivo que guarda el siguiente número de serie
+database      = $dir/index.txt       # archvio que guarda la bd de certificados
+new_certs_dir = $dir/certificados    # dir que guarda los certificados generados
+certificate   = $dir/cacert.pem      # nombre del archivo del certificado raíz
+private_key   = $dir/privado/cakey.pem # llave privada del certificado raíz
+default_md    = md5                  # algoritmo de dispersión usado
+preserve      = no                   # Indica si se preserva o no el orden de los 
+                                     #   campos del DN cuando se pasa a los certs.
+nameopt       = default_ca           # esta opcion y la siguiente permiten mostrar 
+                                     #   detalles del certificado  
+certopt       = default_ca           
+policy        = policy_match         # indica el nombre de la seccion 
+                                     #   donde se especifica que campos son 
+                                     #   obligatorios, opcionales y cuales deben ser
+                                     #   iguales al certificado raíz
+
+# seccion de politicas para la emision de certificados
+[ policy_match ]
+countryName                 = match          # match, obligatorio
+stateOrProvinceName         = match          
+organizationName            = match
+organizationalUnitName      = optional       # optional, campo opcional
+commonName                  = supplied       # supplied, debe estar en la petición 
+emailAddress                = optional
+
+# seccion que indica como los certificados deben ser creados
+[ req ]
+default_bits       = 1024           # tamaño de la llave, si no se indica 512
+default_keyfile    = key.pem        # nombre de la llave privada
+default_md         = md5            # algoritmo de dispersión a utilizar
+string_mask        = nombstr        # caracteres permitidos en la mascara de la llave
+distinguished_name = req_distinguished_name  # seccion para el nombre distinguido (DN)
+req_extensions     = v3_req         # seccion con mas extensiones que se añaden a la
+                                    #   peticion del certificado
+
+# seccion del nombre distinguido, el valor es el prompt que se vera en pantalla.
+# datos del propietario del certificado.
+# esta seccion define el contenido de datos de id que el certificado llevara.
+[ req_distinguished_name ]
+0.organizationName          = Nombre de la organizacion
+0.organizationName_default  = Pato, S.A.
+organizationalUnitName      = Departamento o division
+emailAddress                = Correo electronico
+emailAddress_max            = 40
+localityName                = Ciudad o distrito
+localityName_default        = Leon
+stateOrProvinceName         = Estado o provincia
+stateOrProvinceName_default = Guanajuato
+countryName                 = Codigo del pais (dos letras)
+countryName_default         = MX
+countryName_min             = 2
+countryName_max             = 2
+commonName                  = Nombre comun (hostname o IP)
+commonName_max              = 64
+
+# si en la linea de comandos se indica la opcion -x509, 
+# las siguientes extensiones tambien aplican 
+[ v3_ca ]
+basicConstraints = critical,CA:TRUE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+# indica que se trata de un certificado CA raíz con autoridad para 
+# firmar o revocar otros certificados
+basicConstraints       = CA:TRUE  
+                                 
+# especifica bajo que metodo identificar a la llave publica que sera certificada
+subjectKeyIdentifier   = hash     
+                                  
+# especifica como identifcar la	llave publica														
+authorityKeyIdentifier = keyid:always,issuer:always  
+                                        
+# extensiones de la opcion req
+[ v3_req ]
+basicConstraints            = CA:FALSE  # los certificados firmados no son CA
+subjectKeyIdentifier        = hash 
+# *************************************************************************************

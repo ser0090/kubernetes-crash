@@ -16,3 +16,5 @@ buildNumber.properties
 # addtionals folders
 backup/
 
+*.zip
+istio*/
